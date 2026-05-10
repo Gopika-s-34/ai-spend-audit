@@ -13,3 +13,19 @@ Still planning the structure for the audit recommendation logic and pricing data
 
 **Plan for tomorrow:**  
 Create pricing data files and start building the audit engine logic for recommendations and savings calculations.
+
+## Day 2
+
+**Hours worked:** 5
+
+**What I did:**  
+Created the pricing data structure and implemented the first version of the audit engine. Added recommendation logic, savings calculations, seat handling, and dynamic audit results UI.
+
+**What I learned:**  
+Learned how to separate business logic into reusable utility files and connect frontend state with calculation logic.
+
+**Blockers / what I'm stuck on:**  
+Need to improve recommendation quality and support more AI tools/plans.
+
+**Plan for tomorrow:**  
+Improve the results page design and begin backend integration for saving audits.
