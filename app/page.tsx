@@ -51,16 +51,20 @@ export default function Home() {
 
           <div>
             <label className="block mb-2 text-sm text-gray-300">
-              Tool Name
+              AI Tool
             </label>
 
-            <input
-              type="text"
-              placeholder="ChatGPT"
+            <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
               className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
-            />
+            >
+              <option value="">Select Tool</option>
+              <option value="ChatGPT">ChatGPT</option>
+              <option value="Claude">Claude</option>
+              <option value="Cursor">Cursor</option>
+              <option value="Copilot">GitHub Copilot</option>
+            </select>
           </div>
 
           <div>
@@ -68,13 +72,18 @@ export default function Home() {
               Current Plan
             </label>
 
-            <input
-              type="text"
-              placeholder="Plus"
+            <select
               value={plan}
               onChange={(e) => setPlan(e.target.value)}
               className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
-            />
+            >
+              <option value="">Select Plan</option>
+              <option value="Plus">Plus</option>
+              <option value="Team">Team</option>
+              <option value="Enterprise">Enterprise</option>
+              <option value="Pro">Pro</option>
+              <option value="Business">Business</option>
+            </select>
           </div>
 
           <div>
@@ -106,6 +115,12 @@ export default function Home() {
 
           <button
             onClick={() => {
+
+              if (!tool || !plan || !spend || !seats) {
+                alert("Please fill all fields");
+                return;
+              }
+
               const audit = generateAudit(
                 tool,
                 plan,
@@ -122,7 +137,7 @@ export default function Home() {
 
 
           {result && (
-            <div className="mt-8 p-5 rounded-xl border border-zinc-700 bg-black">
+            <div className="mt-8 p-5 rounded-xl border border-zinc-700 bg-zinc-950">
 
               <h2 className="text-2xl font-bold">
                 Audit Result
@@ -131,7 +146,17 @@ export default function Home() {
               <p className="mt-4 text-gray-300">
                 {result.recommendation}
               </p>
+              <div className="mt-6 mb-6 p-5 rounded-xl bg-green-500/10 border border-green-500/20">
 
+                <p className="text-sm text-green-300">
+                  Estimated Annual Savings
+                </p>
+
+                <h3 className="text-4xl font-bold text-green-400 mt-2">
+                  ${result.yearlySavings}
+                </h3>
+
+              </div>
               <div className="mt-5 space-y-2">
 
                 <p>
@@ -149,8 +174,11 @@ export default function Home() {
                 </p>
 
               </div>
-
+              <p className="mt-2 text-sm text-gray-500">
+                {result.reason}
+              </p>
             </div>
+
           )}
         </div>
 

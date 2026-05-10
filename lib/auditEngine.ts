@@ -5,34 +5,60 @@ export function generateAudit(
     seats: number
 ) {
 
-    let recommendation = "Your current setup looks good.";
+    let recommendation =
+        "Your current setup already looks cost efficient.";
+
     let savings = 0;
 
+    let reason =
+        "Your selected plan matches your current usage.";
+
     if (
-        tool.toLowerCase() === "chatgpt" &&
-        plan.toLowerCase() === "team" &&
+        tool === "ChatGPT" &&
+        plan === "Team" &&
         seats <= 2
     ) {
         recommendation =
-            "Downgrade from Team to Plus plan.";
+            "Downgrade to ChatGPT Plus";
 
         savings = spend - 20 * seats;
+
+        reason =
+            "Small teams usually don't benefit enough from the Team plan pricing.";
     }
 
-    if (
-        tool.toLowerCase() === "cursor" &&
-        plan.toLowerCase() === "business" &&
+    else if (
+        tool === "Cursor" &&
+        plan === "Business" &&
         seats <= 2
     ) {
         recommendation =
-            "Cursor Pro may be sufficient for your team size.";
+            "Switch to Cursor Pro";
 
         savings = spend - 20 * seats;
+
+        reason =
+            "Cursor Business is more suitable for larger engineering teams.";
+    }
+
+    else if (
+        tool === "Copilot" &&
+        plan === "Enterprise" &&
+        seats < 5
+    ) {
+        recommendation =
+            "Switch to Copilot Business";
+
+        savings = spend - 19 * seats;
+
+        reason =
+            "Enterprise features may be unnecessary for smaller teams.";
     }
 
     return {
         recommendation,
-        savings,
-        yearlySavings: savings * 12,
+        savings: Math.max(savings, 0),
+        yearlySavings: Math.max(savings * 12, 0),
+        reason,
     };
 }
