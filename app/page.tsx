@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { generateAudit } from "@/lib/auditEngine";
 
 export default function Home() {
   const [tool, setTool] = useState("");
   const [plan, setPlan] = useState("");
   const [spend, setSpend] = useState("");
+  const [seats, setSeats] = useState("");
+  const [result, setResult] = useState<any>(null);
 
   useEffect(() => {
     const savedData = localStorage.getItem("audit-data");
@@ -16,6 +19,7 @@ export default function Home() {
       setTool(parsedData.tool || "");
       setPlan(parsedData.plan || "");
       setSpend(parsedData.spend || "");
+      setSeats(parsedData.seats || "");
     }
   }, []);
 
@@ -26,9 +30,10 @@ export default function Home() {
         tool,
         plan,
         spend,
+        seats,
       })
     );
-  }, [tool, plan, spend]);
+  }, [tool, plan, spend, seats]);
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center p-6">
 
@@ -85,15 +90,71 @@ export default function Home() {
               className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
             />
           </div>
+          <div>
+            <label className="block mb-2 text-sm text-gray-300">
+              Number of Seats
+            </label>
 
-          <button className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+            <input
+              type="number"
+              placeholder="2"
+              value={seats}
+              onChange={(e) => setSeats(e.target.value)}
+              className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
+            />
+          </div>
+
+          <button
+            onClick={() => {
+              const audit = generateAudit(
+                tool,
+                plan,
+                Number(spend),
+                Number(seats)
+              );
+
+              setResult(audit);
+            }}
+            className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition"
+          >
             Generate Audit
           </button>
 
+
+          {result && (
+            <div className="mt-8 p-5 rounded-xl border border-zinc-700 bg-black">
+
+              <h2 className="text-2xl font-bold">
+                Audit Result
+              </h2>
+
+              <p className="mt-4 text-gray-300">
+                {result.recommendation}
+              </p>
+
+              <div className="mt-5 space-y-2">
+
+                <p>
+                  Monthly Savings:
+                  <span className="text-green-400 font-bold">
+                    {" "} ${result.savings}
+                  </span>
+                </p>
+
+                <p>
+                  Yearly Savings:
+                  <span className="text-green-400 font-bold">
+                    {" "} ${result.yearlySavings}
+                  </span>
+                </p>
+
+              </div>
+
+            </div>
+          )}
         </div>
 
       </div>
-
     </main>
   );
 }
