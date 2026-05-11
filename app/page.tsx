@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { generateAudit } from "@/lib/auditEngine";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   const [tool, setTool] = useState("");
@@ -9,6 +10,9 @@ export default function Home() {
   const [spend, setSpend] = useState("");
   const [seats, setSeats] = useState("");
   const [result, setResult] = useState<any>(null);
+  const [email, setEmail] = useState("");
+  const [shareUrl, setShareUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const savedData = localStorage.getItem("audit-data");
@@ -20,6 +24,7 @@ export default function Home() {
       setPlan(parsedData.plan || "");
       setSpend(parsedData.spend || "");
       setSeats(parsedData.seats || "");
+      setEmail(parsedData.email || "");
     }
   }, []);
 
@@ -31,9 +36,10 @@ export default function Home() {
         plan,
         spend,
         seats,
+        email,
       })
     );
-  }, [tool, plan, spend, seats]);
+  }, [tool, plan, spend, seats, email]);
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center p-6">
 
@@ -112,12 +118,28 @@ export default function Home() {
               className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
             />
           </div>
+          <div>
+            <label className="block mb-2 text-sm text-gray-300">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              placeholder="founder@startup.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-3 rounded-lg bg-black border border-zinc-700 outline-none focus:border-white"
+            />
+          </div>
 
           <button
-            onClick={() => {
+            disabled={loading}
+            onClick={async () => {
+              setLoading(true);
 
-              if (!tool || !plan || !spend || !seats) {
+              if (!tool || !plan || !spend || !seats || !email) {
                 alert("Please fill all fields");
+                setLoading(false);
                 return;
               }
 
@@ -129,10 +151,32 @@ export default function Home() {
               );
 
               setResult(audit);
+
+              const { data } = await supabase
+                .from("audits")
+                .insert([
+                  {
+                    tool,
+                    plan,
+                    spend: Number(spend),
+                    seats: Number(seats),
+                    recommendation: audit.recommendation,
+                    savings: audit.savings,
+                    yearly_savings: audit.yearlySavings,
+                    email,
+                  },
+                ])
+                .select();
+
+              if (data && data[0]) {
+                setShareUrl(`/audit/${data[0].id}`);
+              }
+
+              setLoading(false);
             }}
             className="w-full bg-white text-black py-3 rounded-lg font-semibold hover:bg-gray-200 transition"
           >
-            Generate Audit
+            {loading ? "Generating..." : "Generate Audit"}
           </button>
 
 
@@ -179,6 +223,19 @@ export default function Home() {
               </p>
             </div>
 
+          )}
+          {shareUrl && (
+            <div className="mt-5 p-4 rounded-xl border border-zinc-700 bg-zinc-950">
+
+              <p className="text-sm text-gray-400">
+                Shareable Audit URL
+              </p>
+
+              <p className="mt-2 text-green-400 break-all">
+                {shareUrl}
+              </p>
+
+            </div>
           )}
         </div>
 
