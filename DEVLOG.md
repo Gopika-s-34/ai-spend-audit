@@ -45,3 +45,35 @@ Need to implement backend functionality for storing audits and generating sharea
 
 **Plan for tomorrow:**  
 Set up Supabase integration, save audit reports to the database, and start implementing shareable audit result pages.
+
+## Day 4 
+
+**Hours worked:** 6
+
+**What I did:**  
+Integrated Supabase backend for storing completed audits. Added email capture functionality and implemented audit persistence with unique IDs for future shareable report URLs.
+
+**What I learned:**  
+Learned how to connect a Next.js frontend to Supabase and persist structured audit data in a PostgreSQL database.
+
+**Blockers / what I'm stuck on:**  
+Need to build actual public shareable audit pages and improve security around public audit visibility.
+
+**Plan for tomorrow:**  
+Implement shareable audit pages, AI-generated summaries, deployment, and testing.
+
+## Day 5 
+
+**Hours worked:** 6
+
+**What I did:**  
+Built dynamic shareable audit pages using Next.js route segments and Supabase queries. Added AI-style summaries, metadata for SEO, basic unit testing, and deployed the application to Vercel.
+
+**What I learned:**  
+Learned how to create dynamic routes in Next.js App Router and fetch data server-side from Supabase.
+
+**Blockers / what I'm stuck on:**  
+Need more comprehensive test coverage and stronger audit recommendation intelligence.
+
+**Plan for tomorrow:**  
+Focus on documentation, polishing UI, improving responsiveness, and final submission cleanup.

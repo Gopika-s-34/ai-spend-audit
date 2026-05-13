@@ -1,36 +1,209 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Spend Audit
 
-## Getting Started
+AI Spend Audit is a SaaS-style web application that helps startups identify unnecessary spending on AI tools and discover cost-saving opportunities.
 
-First, run the development server:
+Built with Next.js, TypeScript, Tailwind CSS, and Supabase.
+
+---
+
+# Live Demo
+
+Deployed on Vercel.
+
+```bash
+https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit
+```
+
+---
+
+# Features
+
+* AI tool spend analysis
+* Smart savings recommendations
+* Estimated yearly savings calculation
+* Shareable audit reports
+* Dynamic audit pages
+* Local storage persistence
+* Supabase database integration
+* Responsive modern UI
+* Loading states and validations
+
+---
+
+# Screenshots
+
+## Home Page
+
+Add screenshot like this:
+
+```md
+![Home Page](./screenshots/homepage.png)
+```
+
+## Audit Result
+
+```md
+![Audit Result](./screenshots/audit.png)
+```
+
+## Shared Report
+
+```md
+![Shared Report](./screenshots/shared_report.png)
+```
+
+---
+
+
+# Tech Stack
+
+Frontend:
+
+* Next.js 16
+* React
+* TypeScript
+* Tailwind CSS
+
+Backend:
+
+* Supabase
+
+Deployment:
+
+* Vercel
+
+---
+
+# Folder Structure
+
+```bash
+app/
+ ├── audit/
+ │    └── [id]/
+ │         └── page.tsx
+ ├── globals.css
+ ├── layout.tsx
+ └── page.tsx
+
+lib/
+ ├── auditEngine.ts
+ └── supabase.ts
+
+screenshots/
+
+README.md
+DEVLOG.md
+ARCHITECTURE.md
+```
+
+---
+
+# Local Setup
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Gopika-s-34/ai-spend-audit.git
+```
+
+---
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create:
 
-## Learn More
+```bash
+.env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+Add:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+# Database
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Supabase table:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```sql
+audits
+```
+
+Columns:
+
+* id
+* tool
+* plan
+* spend
+* seats
+* recommendation
+* savings
+* yearly_savings
+* email
+
+---
+
+# Testing
+
+Basic audit engine testing added for:
+
+* savings calculation
+* overspending detection
+* recommendation generation
+
+---
+
+# Challenges Faced
+
+* Configuring Supabase Row Level Security
+* Dynamic routing with Next.js App Router
+* Managing environment variables
+* Creating shareable audit reports
+
+---
+
+# Future Improvements
+
+* Authentication
+* Dashboard analytics
+* Export reports as PDF
+* Charts and visual insights
+* AI-generated optimization suggestions
+
+---
+
+# Author
+
+Gopika
+
+GitHub:
+
+```bash
+https://github.com/Gopika-s-34
+```
+
+---
+
+# License
+
+MIT License
