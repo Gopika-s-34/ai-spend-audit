@@ -37,7 +37,7 @@ https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit
 Add screenshot like this:
 
 ```md
-![Home Page](./screenshots/homepage.png)
+![Home Page](screenshots/homepage.png)
 ```
 
 ## Audit Result
