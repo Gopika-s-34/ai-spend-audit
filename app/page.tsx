@@ -152,7 +152,7 @@ export default function Home() {
 
               setResult(audit);
 
-              const { data } = await supabase
+              const { data,error } = await supabase
                 .from("audits")
                 .insert([
                   {
@@ -168,8 +168,10 @@ export default function Home() {
                 ])
                 .select();
 
+              console.log(data);
+              console.log(error);
               if (data && data[0]) {
-                setShareUrl(`/audit/${data[0].id}`);
+                setShareUrl(`${window.location.origin}/audit/${data[0].id}`);
               }
 
               setLoading(false);
