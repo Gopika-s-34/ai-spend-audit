@@ -10,9 +10,8 @@ Built with Next.js, TypeScript, Tailwind CSS, and Supabase.
 
 Deployed on Vercel.
 
-```bash
-https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit
-```
+[Live Demo](https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit)
+
 
 ---
 
@@ -34,23 +33,18 @@ https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit
 
 ## Home Page
 
-Add screenshot like this:
-
-```md
 ![Home Page](screenshots/homepage.png)
-```
+
 
 ## Audit Result
 
-```md
-![Audit Result](./screenshots/audit.png)
-```
+![Audit Result](screenshots/audit.png)
+
 
 ## Shared Report
 
-```md
-![Shared Report](./screenshots/shared_report.png)
-```
+![Shared Report](screenshots/shared_report.png)
+
 
 ---
 
