@@ -1,20 +1,28 @@
 "use client";
 
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import { useEffect, useState } from "react";
 import { generateAudit } from "@/lib/auditEngine";
 import { supabase } from "@/lib/supabase";
+
+type AuditResult = {
+  recommendation: string;
+  savings: number;
+  yearlySavings: number;
+  reason: string;
+};
 
 export default function Home() {
   const [tool, setTool] = useState("");
   const [plan, setPlan] = useState("");
   const [spend, setSpend] = useState("");
   const [seats, setSeats] = useState("");
-  const [result, setResult] = useState<any>(null);
+    const [result, setResult] = useState<AuditResult | null>(null);
   const [email, setEmail] = useState("");
   const [shareUrl, setShareUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
- /* eslint-disable react-hooks/set-state-in-effect */
 useEffect(() => {
   const savedData = localStorage.getItem("audit-data");
 
@@ -34,7 +42,7 @@ useEffect(() => {
     setEmail(parsedData.email || "");
   }
 }, []);
-/* eslint-enable react-hooks/set-state-in-effect */
+
 
   useEffect(() => {
     localStorage.setItem(
