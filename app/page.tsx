@@ -14,19 +14,27 @@ export default function Home() {
   const [shareUrl, setShareUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const savedData = localStorage.getItem("audit-data");
+ /* eslint-disable react-hooks/set-state-in-effect */
+useEffect(() => {
+  const savedData = localStorage.getItem("audit-data");
 
-    if (savedData) {
-      const parsedData = JSON.parse(savedData);
+  if (savedData) {
+    const parsedData: {
+      tool?: string;
+      plan?: string;
+      spend?: string;
+      seats?: string;
+      email?: string;
+    } = JSON.parse(savedData);
 
-      setTool(parsedData.tool || "");
-      setPlan(parsedData.plan || "");
-      setSpend(parsedData.spend || "");
-      setSeats(parsedData.seats || "");
-      setEmail(parsedData.email || "");
-    }
-  }, []);
+    setTool(parsedData.tool || "");
+    setPlan(parsedData.plan || "");
+    setSpend(parsedData.spend || "");
+    setSeats(parsedData.seats || "");
+    setEmail(parsedData.email || "");
+  }
+}, []);
+/* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     localStorage.setItem(
