@@ -10,7 +10,7 @@ Built with Next.js, TypeScript, Tailwind CSS, and Supabase.
 
 Deployed on Vercel.
 
-[Live Demo](https://vercel.com/gopikas-projects-d9b21618/ai-spend-audit)
+[Live Demo](https://ai-spend-audit-rho-sable.vercel.app/)
 
 
 ---
@@ -159,11 +159,21 @@ Columns:
 
 # Testing
 
-Basic audit engine testing added for:
+Audit engine tests were written using Jest/Vitest to validate recommendation logic and savings calculations.
 
-* savings calculation
-* overspending detection
-* recommendation generation
+Covered test cases:
+
+- savings calculation accuracy
+- yearly savings computation
+- overspending detection
+- plan downgrade recommendations
+- alternative tool recommendation logic
+
+Run tests:
+
+```bash
+npm test
+```
 
 ---
 
@@ -183,6 +193,20 @@ Basic audit engine testing added for:
 * Export reports as PDF
 * Charts and visual insights
 * AI-generated optimization suggestions
+
+---
+
+# Key Decisions & Tradeoffs
+
+1. Used Next.js App Router for dynamic audit pages and shareable URLs, despite added routing complexity.
+
+2. Chose Supabase instead of building a custom backend to speed up development and simplify database management.
+
+3. Used hardcoded pricing logic for audit calculations because deterministic financial recommendations are more reliable than LLM-generated calculations.
+
+4. Added localStorage persistence so users do not lose form data on refresh, improving UX without requiring authentication.
+
+5. Prioritized mobile responsiveness and fast loading over advanced dashboard analytics for the MVP scope.
 
 ---
 
