@@ -18,7 +18,7 @@ export default function Home() {
   const [plan, setPlan] = useState("");
   const [spend, setSpend] = useState("");
   const [seats, setSeats] = useState("");
-    const [result, setResult] = useState<AuditResult | null>(null);
+  const [result, setResult] = useState<AuditResult | null>(null);
   const [email, setEmail] = useState("");
   const [shareUrl, setShareUrl] = useState("");
   const [loading, setLoading] = useState(false);
